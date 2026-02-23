@@ -1,0 +1,202 @@
+backend:
+  name: github
+  repo: your-username/fruitful-spirit # TODO: Update with actual GitHub repo path
+  branch: main
+  base_url: https://your-site.com # TODO: Update if using external OAuth
+  # auth_endpoint: /api/auth # If using custom auth
+
+local_backend: true # Allows local testing with 'npx decap-server'
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  # ── BLOG POSTS ──
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { name: "title", label: "Title", widget: "string" }
+      - { name: "date", label: "Publish Date", widget: "datetime" }
+      - { name: "author", label: "Author", widget: "string" }
+      - { name: "excerpt", label: "Excerpt", widget: "text" }
+      - { name: "featured_image", label: "Featured Image", widget: "image" }
+      - { name: "category", label: "Category", widget: "select",
+          options: ["Devotionals", "Fruit Studies", "App Updates",
+                    "Ministry News", "Guest Posts", "Parenting",
+                    "Small Groups"] }
+      - { name: "fruits", label: "Related Fruits", widget: "select",
+          multiple: true, required: false,
+          options: ["love", "joy", "peace", "patience", "kindness",
+                    "goodness", "faithfulness", "gentleness",
+                    "self-control"] }
+      - { name: "featured", label: "Featured Post", widget: "boolean",
+          default: false }
+      - { name: "body", label: "Body", widget: "markdown" }
+
+  # ── COMMUNITY STORIES ──
+  - name: "stories"
+    label: "Community Stories"
+    folder: "src/content/stories"
+    create: true
+    fields:
+      - { name: "title", label: "Story Title", widget: "string" }
+      - { name: "person_name", label: "Person's Name", widget: "string" }
+      - { name: "anonymous", label: "Display as Anonymous",
+          widget: "boolean", default: false }
+      - { name: "photo", label: "Person's Photo", widget: "image",
+          required: false }
+      - { name: "date", label: "Date", widget: "datetime" }
+      - { name: "fruits", label: "Related Fruits", widget: "select",
+          multiple: true, required: false,
+          options: ["love", "joy", "peace", "patience", "kindness",
+                    "goodness", "faithfulness", "gentleness",
+                    "self-control"] }
+      - { name: "pull_quote", label: "Pull Quote", widget: "text" }
+      - { name: "body", label: "Story", widget: "markdown" }
+
+  # ── DONATION REPORTS ──
+  - name: "donation_reports"
+    label: "Donation Reports"
+    folder: "src/content/donations"
+    create: true
+    fields:
+      - { name: "title", label: "Report Title", widget: "string" }
+      - { name: "period", label: "Report Period", widget: "string" }
+      - { name: "date", label: "Report Date", widget: "datetime" }
+      - { name: "total_revenue", label: "Total Revenue ($)",
+          widget: "number", value_type: "float" }
+      - { name: "total_distributed", label: "Total Distributed ($)",
+          widget: "number", value_type: "float" }
+      - { name: "rockharbor_amount", label: "RockHarbor Church ($)",
+          widget: "number", value_type: "float" }
+      - { name: "missionary_amount", label: "Missionary Orgs ($)",
+          widget: "number", value_type: "float" }
+      - { name: "app_dev_amount", label: "App Development ($)",
+          widget: "number", value_type: "float" }
+      - { name: "product_dev_amount", label: "Product Development ($)",
+          widget: "number", value_type: "float" }
+      - { name: "report_pdf", label: "Full Report PDF", widget: "file",
+          required: false }
+      - { name: "body", label: "Summary & Highlights",
+          widget: "markdown" }
+
+  # ── IMPACT METRICS (single file) ──
+  - name: "impact"
+    label: "Impact Metrics"
+    files:
+      - name: "impact_data"
+        label: "Impact Data"
+        file: "src/content/data/impact.json"
+        fields:
+          - { name: "total_distributed", label: "Total $ Distributed",
+              widget: "number", value_type: "float" }
+          - { name: "partners_supported", label: "Partners Supported",
+              widget: "number" }
+          - { name: "countries_reached", label: "Countries Reached",
+              widget: "number" }
+          - { name: "app_downloads", label: "App Downloads",
+              widget: "number" }
+          - { name: "lives_impacted", label: "Lives Impacted (est.)",
+              widget: "number" }
+          - { name: "last_updated", label: "Last Updated",
+              widget: "datetime" }
+
+  # ── SHOP PRODUCTS ──
+  - name: "products"
+    label: "Shop Products"
+    folder: "src/content/products"
+    create: true
+    fields:
+      - { name: "title", label: "Product Name", widget: "string" }
+      - { name: "image", label: "Product Image", widget: "image" }
+      - { name: "price", label: "Price", widget: "string" }
+      - { name: "category", label: "Category", widget: "select",
+          options: ["Apparel", "Drinkware", "Home & Living",
+                    "Stationery", "Coloring Books", "Devotionals",
+                    "Curriculum", "Printable Art", "Bundles"] }
+      - { name: "shopify_url", label: "Shopify URL",
+          widget: "string", required: false }
+      - { name: "etsy_url", label: "Etsy URL",
+          widget: "string", required: false }
+      - { name: "featured", label: "Featured on Homepage",
+          widget: "boolean", default: false }
+      - { name: "fruits", label: "Related Fruits", widget: "select",
+          multiple: true, required: false,
+          options: ["love", "joy", "peace", "patience", "kindness",
+                    "goodness", "faithfulness", "gentleness",
+                    "self-control"] }
+      - { name: "description", label: "Description",
+          widget: "markdown" }
+
+  # ── TEAM MEMBERS ──
+  - name: "team"
+    label: "Team & Board"
+    folder: "src/content/team"
+    create: true
+    fields:
+      - { name: "name", label: "Full Name", widget: "string" }
+      - { name: "role", label: "Role/Title", widget: "string" }
+      - { name: "photo", label: "Photo", widget: "image",
+          required: false }
+      - { name: "type", label: "Type", widget: "select",
+          options: ["Board", "Advisory", "Staff", "Partner"] }
+      - { name: "order", label: "Display Order", widget: "number" }
+      - { name: "bio", label: "Bio", widget: "markdown" }
+
+  # ── FRUIT OF THE SPIRIT PAGES ──
+  - name: "fruits"
+    label: "Fruit of the Spirit Pages"
+    folder: "src/content/fruits"
+    create: true
+    fields:
+      - { name: "title", label: "Fruit Name", widget: "string" }
+      - { name: "order", label: "Display Order (1-9)",
+          widget: "number" }
+      - { name: "icon", label: "Icon/Illustration", widget: "image" }
+      - { name: "color", label: "Accent Color Hex",
+          widget: "string" }
+      - { name: "primary_scripture", label: "Primary Scripture",
+          widget: "text" }
+      - { name: "scripture_reference", label: "Scripture Reference",
+          widget: "string" }
+      - { name: "short_description", label: "One-Line Description",
+          widget: "string" }
+      - { name: "body", label: "Full Content", widget: "markdown" }
+
+  # ── STATIC PAGES ──
+  - name: "pages"
+    label: "Pages"
+    files:
+      - name: "my-testimony"
+        label: "My Testimony"
+        file: "src/content/pages/my-testimony.md"
+        fields:
+          - { name: "title", label: "Title", widget: "string" }
+          - { name: "body", label: "Content", widget: "markdown" }
+      - name: "our-story"
+        label: "Our Story"
+        file: "src/content/pages/our-story.md"
+        fields:
+          - { name: "title", label: "Title", widget: "string" }
+          - { name: "body", label: "Content", widget: "markdown" }
+      - name: "mission"
+        label: "Mission & Values"
+        file: "src/content/pages/mission.md"
+        fields:
+          - { name: "title", label: "Title", widget: "string" }
+          - { name: "body", label: "Content", widget: "markdown" }
+      - name: "privacy"
+        label: "Privacy Policy"
+        file: "src/content/pages/privacy.md"
+        fields:
+          - { name: "title", label: "Title", widget: "string" }
+          - { name: "body", label: "Content", widget: "markdown" }
+      - name: "terms"
+        label: "Terms of Service"
+        file: "src/content/pages/terms.md"
+        fields:
+          - { name: "title", label: "Title", widget: "string" }
+          - { name: "body", label: "Content", widget: "markdown" }
