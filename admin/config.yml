@@ -1,8 +1,8 @@
 backend:
   name: github
-  repo: your-username/fruitful-spirit # TODO: Update with actual GitHub repo path
+  repo: thefruitfulorg/thefruitfulspirit.github.io # TODO: Update with actual GitHub repo path
   branch: main
-  base_url: https://your-site.com # TODO: Update if using external OAuth
+  base_url: https://thefruitfulorg.github.io/thefruitfulspirit.github.io/ # TODO: Update if using external OAuth
   # auth_endpoint: /api/auth # If using custom auth
 
 local_backend: true # Allows local testing with 'npx decap-server'
